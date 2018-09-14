@@ -18,6 +18,6 @@ export default function middleware(midOpts = {}) {
   return function(ctx, next) {
     ctx.respond = respond(ctx, midOpts)
     ctx.respondWith = (result, opts) => respondWith(ctx, midOpts)(result, opts)
-    next()
+    return next()
   }
 }
