@@ -1,5 +1,6 @@
 'use strict'
 
+import Debug from 'debug'
 import log from './log'
 import getValue from './get-value'
 
