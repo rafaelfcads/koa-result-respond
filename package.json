@@ -2,7 +2,7 @@
   "name": "koa-result-respond",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/koa-respond.js",
   "scripts": {
     "pretest": "eslint .",
     "test": "nyc --require babel-core/register mocha --recursive --exit",
