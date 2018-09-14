@@ -1,34 +1,27 @@
 'use strict'
 
 import { defaults } from 'lodash/fp'
-import Type from 'result-tools/type'
+import log from './log'
+import respondWith from './with'
 
-const getValue = (result) => Type.isOk(result) || Type.isError(result)
-  ? result.get()
-  : result
-
-const log = function log(result, opts) {
-  const { logger, level } = opts
-  const val = getValue(result)
-  if (level === 'INFO') logger.info(val)
-  if (level === 'ERROR' && Type.isError(result)) logger.error(val)
+const defaultLogOpts = {
+  logger: { info: console.log, error: console.log },
+  level: 'ERROR'
 }
 
-const respond = (ctx, opts) => (status, result) => {
-  log(result, opts)
-  ctx.status = status
-  ctx.body = getValue(result)
-}
+export default function middleware(midOpts = {}) {
 
-export default function middleware(opts = {}) {
+  return function(ctx, next) {
 
-  opts = defaults({
-    logger: { info: console.log, error: console.log },
-    level: 'ERROR'
-  }, opts)
-
-  return (ctx, next) => {
-    ctx.respond = respond(ctx, opts)
+    ctx.respond = (opts) => {
+      opts = defaults(defaultLogOpts, midOpts)
+      const logger = log(ctx, opts)
+      return respondWith(ctx, logger)
+    }
+    ctx.respondWith = (result, opts) => {
+      const logger = log(ctx, midOpts)
+      respondWith(ctx, logger)(result, opts)
+    }
     next()
   }
 }
