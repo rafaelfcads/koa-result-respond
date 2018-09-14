@@ -26,8 +26,9 @@ describe('koaRespond', function() {
     const nextStub = sinon.stub()
     koaRespond()(ctx, nextStub)
 
-    const respondWith = ctx.respond()
-    expect(respondWith).to.be.a('function')
+    const obj = ctx.respond()
+    expect(obj).to.be.a('object')
+    expect(obj.with).to.be.a('function')
   })
 
   it('when call respondWith should sent response back', function() {

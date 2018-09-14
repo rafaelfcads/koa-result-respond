@@ -1,7 +1,6 @@
 'use strict'
 
 import { defaults } from 'lodash/fp'
-import log from './log'
 import respondWith from './with'
 
 const defaultLogOpts = {
@@ -9,19 +8,16 @@ const defaultLogOpts = {
   level: 'ERROR'
 }
 
+const respond = (ctx, midOpts) => (opts) => {
+  opts = defaults(defaultLogOpts, midOpts)
+  return { with: respondWith(ctx, opts) }
+}
+
 export default function middleware(midOpts = {}) {
 
   return function(ctx, next) {
-
-    ctx.respond = (opts) => {
-      opts = defaults(defaultLogOpts, midOpts)
-      const logger = log(ctx, opts)
-      return respondWith(ctx, logger)
-    }
-    ctx.respondWith = (result, opts) => {
-      const logger = log(ctx, midOpts)
-      respondWith(ctx, logger)(result, opts)
-    }
+    ctx.respond = respond(ctx, midOpts)
+    ctx.respondWith = (result, opts) => respondWith(ctx, midOpts)(result, opts)
     next()
   }
 }
