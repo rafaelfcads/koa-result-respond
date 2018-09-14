@@ -1,8 +1,8 @@
 'use strict'
 
 import { Ok, Error } from 'result-tools'
-import log from '../src/log'
-import respondWith from '../src/with'
+import log from '../../src/log'
+import respondWith from '../../src/with'
 
 describe('with', function() {
 
