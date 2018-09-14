@@ -1,7 +1,9 @@
 'use strict'
 
-export default (ctx, log) => (result, opts) => {
+import getValue from './get-value'
+
+export default (ctx, log) => (result) => {
   log(result)
-  ctx.status = status
+  ctx.status = result.isOk() ? 200 : 500
   ctx.body = getValue(result)
 }
