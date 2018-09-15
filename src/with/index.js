@@ -13,16 +13,15 @@ const hasHttpBody = (result) => isType(result)
   ? result.get().hasOwnProperty('httpBody')
   : result.hasOwnProperty('httpBody')
 
-export default (ctx, logOpts) => (result, opts) => {
+export default (ctx, logOpts) => (result) => {
 
   log(ctx, logOpts)(result)
 
   if (hasHttpCode(result) || hasHttpBody(result)) {
-    return fromHttpResult(ctx, result, opts)
+    return fromHttpResult(ctx, result)
   }
 
   if (isType(result)) return fromResult(ctx, result)
 
-  ctx.status = !result ? 204 : 200
   ctx.body = result
 }

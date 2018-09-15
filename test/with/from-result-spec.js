@@ -1,18 +1,16 @@
 'use strict'
 
 import { Ok, Error } from 'result-tools'
-import log from '../../src/log'
-import respondWith from '../../src/with'
+import fromResult from '../../src/with/from-result'
 
-describe('with', function() {
+describe('with/fromResult', function() {
 
-  it('should status to be eq 200 and body', function() {
+  it('should status to be eq 200 when is Ok', function() {
 
     const ctx = {}
-    const logger = log(ctx, { level: 'NONE' })
     const result = Ok('Ok value')
 
-    respondWith(ctx, logger)(result)
+    fromResult(ctx, result)
     expect(ctx.status).to.be.eq(200)
     expect(ctx.body).to.be.eq(result.get())
   })
@@ -20,10 +18,9 @@ describe('with', function() {
   it('should status to be eq 500 and body', function() {
 
     const ctx = {}
-    const logger = log(ctx, { level: 'NONE' })
     const result = Error('Error value')
 
-    respondWith(ctx, logger)(result)
+    fromResult(ctx, result)
     expect(ctx.status).to.be.eq(500)
     expect(ctx.body).to.be.eq(result.get())
   })
