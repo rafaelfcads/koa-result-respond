@@ -7,11 +7,11 @@ import fromResult from './from-result'
 
 const hasHttpCode = (result) => isType(result)
   ? result.get().hasOwnProperty('httpCode')
-  : result.hasOwnProperty('httpCode')
+  : result && result.hasOwnProperty('httpCode')
 
 const hasHttpBody = (result) => isType(result)
   ? result.get().hasOwnProperty('httpBody')
-  : result.hasOwnProperty('httpBody')
+  : result && result.hasOwnProperty('httpBody')
 
 export default (ctx, logOpts) => (result) => {
 

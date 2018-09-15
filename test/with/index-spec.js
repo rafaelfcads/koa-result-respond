@@ -60,6 +60,16 @@ describe('with/index', function() {
     expect(ctx.body).to.be.eq(result.get())
   })
 
+  it('should return undefined in ctx.body', function() {
+
+    const ctx = {}
+    const logOpts = {}
+
+    respondWith(ctx, logOpts)()
+    expect(ctx.status).to.be.not.ok
+    expect(ctx.body).to.be.not.ok
+  })
+
   it('should return number in ctx.body', function() {
 
     const ctx = {}
