@@ -70,6 +70,17 @@ describe('with/index', function() {
     expect(ctx.body).to.be.not.ok
   })
 
+  it('should return undefined in ctx.body when result is Ok()', function() {
+
+    const ctx = {}
+    const logOpts = {}
+    const result = Ok()
+
+    respondWith(ctx, logOpts)(result)
+    expect(ctx.status).to.be.eq(200)
+    expect(ctx.body).to.be.not.ok
+  })
+
   it('should return number in ctx.body', function() {
 
     const ctx = {}
