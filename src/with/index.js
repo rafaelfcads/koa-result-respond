@@ -6,13 +6,12 @@ import fromHttpResult from './from-http-result'
 import fromResult from './from-result'
 import wrapper from './wrapper'
 
-const hasHttpCode = (result) => isType(result)
-  ? result.get() && result.get().hasOwnProperty('httpCode')
-  : result && result.hasOwnProperty('httpCode')
+const hasProperty = (result, property) => isType(result)
+  ? result.get() && result.get().hasOwnProperty(property)
+  : result && result.hasOwnProperty(property)
 
-const hasHttpBody = (result) => isType(result)
-  ? result.get() && result.get().hasOwnProperty('httpBody')
-  : result && result.hasOwnProperty('httpBody')
+const hasHttpCode = (result) => hasProperty(result, 'httpCode')
+const hasHttpBody = (result) => hasProperty(result, 'httpBody')
 
 export default (ctx, opts) => (result) => {
 
