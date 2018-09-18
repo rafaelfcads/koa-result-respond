@@ -14,6 +14,6 @@ export default (ctx, result, opts) => {
   const body = get('httpBody', obj)
 
   debug(`fromHttpResult: status = ${status}, body = ${body}`)
-  ctx.status = status
+  if (status) ctx.status = status
   ctx.body = wrapper(body, opts)
 }
