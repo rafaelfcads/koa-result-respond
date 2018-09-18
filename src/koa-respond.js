@@ -3,21 +3,22 @@
 import { defaults } from 'lodash/fp'
 import respondWith from './with'
 
-const defaultLogOpts = {
+const defaultOpts = {
+  autoMessage: true,
   logger: { info: console.log, error: console.log },
   level: 'ERROR'
 }
 
 const respond = (ctx, midOpts) => (opts) => {
-  opts = defaults(defaultLogOpts, midOpts)
+  opts = defaults(midOpts, opts)
   return { with: respondWith(ctx, opts) }
 }
 
-export default function middleware(midOpts = {}) {
+export default function middleware(midOpts = defaultOpts) {
 
   return function(ctx, next) {
     ctx.respond = respond(ctx, midOpts)
-    ctx.respondWith = (result, opts) => respondWith(ctx, midOpts)(result, opts)
+    ctx.respondWith = (result) => respondWith(ctx, midOpts)(result)
     return next()
   }
 }

@@ -1,7 +1,7 @@
 'use strict'
 
 import { Ok, Error } from 'result-tools'
-import log from '../src/log'
+import log from '../../src/log'
 
 describe('log', function() {
 

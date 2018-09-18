@@ -1,7 +1,7 @@
 'use strict'
 
 import { Ok, Error } from 'result-tools'
-import getValue from '../src/get-value'
+import getValue from '../../src/get-value'
 
 describe('getValue', function() {
 

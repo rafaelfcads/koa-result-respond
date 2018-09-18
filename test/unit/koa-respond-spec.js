@@ -1,7 +1,7 @@
 'use strict'
 
 import { Ok } from 'result-tools'
-import koaRespond from '../src/koa-respond'
+import koaRespond from '../../src/koa-respond'
 
 describe('koaRespond', function() {
 
