@@ -13,9 +13,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "debug": "^4.0.1",
-    "lodash": "^4.17.10",
-    "result-tools": "git+https://github.com/celsomarques/result-tools.git"
+    "debug": "4.0.1",
+    "lodash": "4.17.10",
+    "result-tools": "1.0.8"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
